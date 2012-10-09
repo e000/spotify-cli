@@ -25,6 +25,10 @@ def play():
         print>>sys.stderr, "Usage: %s [song - artist]" % os.path.basename(sys.argv[0])
 
     else:
+        if query.startswith("spotify:"):
+            get_spotify_dbus().OpenUri(query)
+            return
+
         track = lookup_spotify(query)
         if track:
             href = track['href']
